@@ -27,7 +27,7 @@ import (
 )
 
 var (
-	ctx        = context.TODO()
+	ctx        = context.Background()
 	authDomain = os.Getenv("AUTHDOMAIN")
 	certsURL   = fmt.Sprintf("%s/cdn-cgi/access/certs", authDomain)
 
@@ -111,7 +111,7 @@ func main() {
 		proxy.ServeHTTP(w, r)
 	})))
 
-	log.Printf("Listening on http://%s/", listenAddr)
+	log.Printf("Listening on %s", listenAddr)
 	if err := http.ListenAndServe(listenAddr, nil); err != nil {
 		log.Fatalf("Unable to start server on [%s], error: %s", listenAddr, err.Error())
 	}
