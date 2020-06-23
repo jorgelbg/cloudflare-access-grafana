@@ -11,7 +11,7 @@ Access](https://teams.cloudflare.com/access/) and forward the email of the signe
 Running this small proxy between Cloudflare Access and your Grafana instance allows you to
 automatically sign in the authenticated user from Cloudflare Access into Grafana.
 
-## 🎮 Installation / Getting started
+## 📥 Installation / Getting started
 
 To accomplish this Grafana has to run in with the [Auth Proxy
 Authentication](https://grafana.com/docs/grafana/latest/auth/auth-proxy/) mode enabled. This will
@@ -61,7 +61,7 @@ automatically signup/sign in (depending on the configuration) the user.
 > into the cloudflare-access-grafana instance. Grafana doesn't need to be accessible externally since
 > all requests will go through the proxy.
 
-### Known Issues
+## 👾 Known Issues
 
 * Since the authentication is no longer on the Grafana side, the logout action will not work as
   expected. Although it will execute normally, you will find yourself logged in again. This happens
