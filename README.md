@@ -63,9 +63,9 @@ automatically signup/sign in (depending on the configuration) the user.
 
 ## 👾 Known Issues
 
-* Since the authentication is no longer on the Grafana side, the logout action will not work as
-  expected. Although it will execute normally, you will find yourself logged in again. This happens
-  because the current user has not been logged out of Cloudflare Access.
+Since the authentication is no longer on the Grafana side, the logout action will not work as
+expected. Although it will execute normally, you will find yourself logged in again. This happens
+because the current user has not been logged out of Cloudflare Access.
 
 ## 🛠 Configuration
 
