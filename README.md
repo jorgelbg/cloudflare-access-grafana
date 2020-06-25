@@ -3,7 +3,7 @@
 ![Docker pulls](https://badgen.net/docker/pulls/jorgelbg/cloudflare-access-grafana?icon=docker&color=purple)
 
 <p align="center">
-    <img class="center" src="logo.svg" width="150" alt="dissect-tester logo"/>
+    <img class="center" src="docs/logo.svg" width="150" alt="dissect-tester logo"/>
 </p>
 
 cloudflare-access-grafana is an HTTP proxy implemented to run as transparently behind [Cloudflare
