@@ -3,7 +3,7 @@
 ![Docker pulls](https://badgen.net/docker/pulls/jorgelbg/cloudflare-access-grafana?icon=docker&color=purple)
 
 <p align="center">
-    <img class="center" src="docs/logo.svg" width="150" alt="dissect-tester logo"/>
+    <img class="center" src="docs/logo.svg" width="150" alt="cloudflare access grafana logo"/>
 </p>
 
 cloudflare-access-grafana is an HTTP proxy implemented to run as transparently behind [Cloudflare
@@ -80,7 +80,7 @@ All the configuration options are passed to cloudflare-access-proxy as environme
 ## 👨🏻‍💻 Developing
 
 ```shell
-git clone https://github.com/jorgelbg/dissect-tester
+git clone https://github.com/jorgelbg/cloudflare-access-grafana
 cd cloudflare-access-grafana/
 make
 ```
