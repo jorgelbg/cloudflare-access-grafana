@@ -161,7 +161,9 @@ func (c *claimsTest) run(t *testing.T) {
 	})
 
 	req := httptest.NewRequest("GET", "http://domain.com", nil)
-	req.Header.Add(CFJWTHeader, token)
+	if c.claims != "" {
+		req.Header.Add(CFJWTHeader, token)
+	}
 
 	VerifyToken(next, verifier, cfg).ServeHTTP(rr, req)
 
@@ -243,6 +245,17 @@ func TestVerifierMiddleware(t *testing.T) {
 					t.Errorf("Wrong user was authenticated (-want +got):\n%s", diff)
 				}
 			},
+		},
+		{
+			name:       "empty claim",
+			now:        now,
+			signingKey: loadRSAPrivKey(t, "testdata/rsa_1.pem", jose.RS256),
+			pubKeys: []*jose.JSONWebKey{
+				loadRSAKey(t, "testdata/rsa_1.pem", jose.RS256),
+			},
+			claims:   "",
+			upstream: false,
+			fn:       nil,
 		},
 	}
 
