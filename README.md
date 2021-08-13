@@ -6,9 +6,9 @@
     <img class="center" src="docs/logo.svg" width="150" alt="cloudflare access grafana logo"/>
 </p>
 
-cloudflare-access-grafana is an HTTP proxy implemented to run as transparently behind [Cloudflare
+cloudflare-access-grafana is an HTTP proxy implemented to run transparently behind [Cloudflare
 Access](https://teams.cloudflare.com/access/) and forward the email of the signed-in user to Grafana.
-Running this small proxy between Cloudflare Access and your Grafana instance allows you to
+Running this small proxy between Cloudflare Access and Grafana instance allows you to
 automatically sign in the authenticated user from Cloudflare Access into Grafana.
 
 ## 📥 Installation / Getting started
