@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: cloudflare-access-grafana
+  name: cloudflare-access-grafana
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloudflare-access-grafana
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: cloudflare-access-grafana
+    spec:
+      containers:
+      - image: jorgelbg/cloudflare-access-grafana
+        name: cloudflare-access-grafana
+        ports:
+          - containerPort: 3001
+        env:
+          - name: AUTHDOMAIN
+            value: https://<your-own-domain>.cloudflareaccess.com
+          - name: POLICYAUD 
+            value: <YOUR_POLICY_AUD_TOKEN>
+          - name: FORWARDHEADER
+            value: X-WEBAUTH-USER
+          - name: FORWARDHOST
+            value: <grafana-host>:3000
+          - name: ADDR
+            value: :3001
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: cloudflare-access-grafana
+  name: cloudflare-access-grafana
+  namespace: monitoring
+spec:
+  ports:
+    - name: "3001"
+      port: 3001
+      targetPort: 3001
+  selector:
+    app: cloudflare-access-grafana
