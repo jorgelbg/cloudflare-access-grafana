@@ -60,7 +60,7 @@ func VerifyToken(next http.Handler, tokenVerifier *oidc.IDTokenVerifier, cfg *Co
 		accessJWT := headers.Get(CFJWTHeader)
 		if accessJWT == "" {
 			w.WriteHeader(http.StatusUnauthorized)
-			w.Write([]byte("No token on the request"))
+			w.Write([]byte("No token on the request")) //nolint: errcheck
 			return
 		}
 
@@ -69,7 +69,7 @@ func VerifyToken(next http.Handler, tokenVerifier *oidc.IDTokenVerifier, cfg *Co
 		token, err := tokenVerifier.Verify(ctx, accessJWT)
 		if err != nil {
 			w.WriteHeader(http.StatusUnauthorized)
-			w.Write([]byte(fmt.Sprintf("Invalid token: %s", err.Error())))
+			w.Write([]byte(fmt.Sprintf("Invalid token: %s", err.Error()))) //nolint: errcheck
 			return
 		}
 
@@ -77,7 +77,7 @@ func VerifyToken(next http.Handler, tokenVerifier *oidc.IDTokenVerifier, cfg *Co
 		var claims CloudflareClaim
 		if err := token.Claims(&claims); err != nil {
 			w.WriteHeader(http.StatusUnauthorized)
-			w.Write([]byte(fmt.Sprintf("Invalid claims in token: %s", err.Error())))
+			w.Write([]byte(fmt.Sprintf("Invalid claims in token: %s", err.Error()))) //nolint: errcheck
 		}
 
 		// set the authentication forward header before proxying the request
