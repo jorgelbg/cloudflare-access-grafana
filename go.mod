@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/coreos/go-oidc v2.2.1+incompatible
-	github.com/google/go-cmp v0.5.5
+	github.com/google/go-cmp v0.5.8
 	github.com/kelseyhightower/envconfig v1.4.0
 	gopkg.in/square/go-jose.v2 v2.6.0
 )
