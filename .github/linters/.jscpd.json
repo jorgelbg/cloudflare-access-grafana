@@ -1,0 +1,12 @@
+{
+    "threshold": 0,
+    "reporters": [
+        "html",
+        "markdown"
+    ],
+    "ignore": [
+        "main_test.go",
+        "**/.git/**",
+        "**/*.md"
+    ]
+}
