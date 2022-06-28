@@ -2,24 +2,24 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: cloudflare-access-grafana
-  name: cloudflare-access-grafana
+    app: cfaccess-proxy
+  name: cfaccess-proxy
   namespace: monitoring
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: cloudflare-access-grafana
+      app: cfaccess-proxy
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: cloudflare-access-grafana
+        app: cfaccess-proxy
     spec:
       containers:
-      - image: jorgelbg/cloudflare-access-grafana
-        name: cloudflare-access-grafana
+      - image: j0sh3rs/cfaccess-proxy
+        name: cfaccess-proxy
         ports:
           - containerPort: 3001
         env:
@@ -27,8 +27,10 @@ spec:
             value: https://<your-own-domain>.cloudflareaccess.com
           - name: POLICYAUD 
             value: <YOUR_POLICY_AUD_TOKEN>
-          - name: FORWARDHEADER
+          - name: FORWARDUSERHEADER
             value: X-WEBAUTH-USER
+          - name: FORWARDEMAILHEADER
+            value: X-WEBAUTH-EMAIL
           - name: FORWARDHOST
             value: <grafana-host>:3000
           - name: ADDR
@@ -39,8 +41,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: cloudflare-access-grafana
-  name: cloudflare-access-grafana
+    app: cfaccess-proxy
+  name: cfaccess-proxy
   namespace: monitoring
 spec:
   ports:
@@ -48,4 +50,4 @@ spec:
       port: 3001
       targetPort: 3001
   selector:
-    app: cloudflare-access-grafana
+    app: cfaccess-proxy

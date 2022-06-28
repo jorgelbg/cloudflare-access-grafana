@@ -13,7 +13,7 @@ on:
   # pull_request:
 env:
   # TODO: Change variable to your image's name.
-  IMAGE_NAME: jorgelbg/cloudflare-access-grafana
+  IMAGE_NAME: ghcr.io/j0sh3rs/cfaccess-proxy
 
 jobs:
   # Run tests.
@@ -47,8 +47,15 @@ jobs:
       - name: Build image
         run: docker build --build-arg MOD=readonly . --file Dockerfile --tag image
 
+      - name: Generate Token
+        uses: tibdex/github-app-token@v1
+        id: generate-token
+        with:
+          app_id: "${{ secrets.BOT_APP_ID }}"
+          private_key: "${{ secrets.BOT_APP_PRIVATE_KEY }}"
+
       - name: Log into registry
-        run: echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u ${{ github.actor }} --password-stdin
+        run: echo "${{ steps.generate-token.outputs.token }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Push image
         run: |

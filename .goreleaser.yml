@@ -1,4 +1,4 @@
-project_name: cloudflare-access-grafana
+project_name: cfaccess-proxy
 
 before:
   hooks:
