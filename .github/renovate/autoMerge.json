@@ -1,0 +1,17 @@
+{
+  "packageRules": [
+    {
+      "matchDatasources": [
+        "github-tags"
+      ],
+      "automerge": true,
+      "automergeType": "branch",
+      "requiredStatusChecks": null,
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "major"
+      ]
+    }
+  ]
+}

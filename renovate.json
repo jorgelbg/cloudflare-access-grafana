@@ -1,6 +1,26 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base"
-  ]
+    ":enableRenovate",
+    "config:base",
+    ":disableRateLimiting",
+    ":dependencyDashboard",
+    ":separatePatchReleases",
+    "docker:enableMajor",
+    ":enablePreCommit",
+    "github>j0sh3rs/cfaccess-proxy//.github/renovate/autoMerge",
+    "github>j0sh3rs/cfaccess-proxy//.github/renovate/labels"
+  ],
+  "platform": "github",
+  "username": "Barrybot[bot]",
+  "repositories": [
+    "j0sh3rs/cfaccess-proxy"
+  ],
+  "onboarding": false,
+  "gitAuthor": "Barrybot <github@beholdtheurricane.com>",
+  "dependencyDashboardTitle": "Renovate Dashboard 🤖",
+  "suppressNotifications": [
+    "prIgnoreNotification"
+  ],
+  "rebaseWhen": "auto"
 }
