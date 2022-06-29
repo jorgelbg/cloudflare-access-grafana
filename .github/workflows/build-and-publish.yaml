@@ -9,13 +9,13 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         name: Check out code
 
       - uses: mr-smithers-excellent/docker-build-push@v5
         name: Build & push Docker image
         with:
-          image: ghcr.io/j0sh3rs/cfaccess-proxy
+          image: cfaccess-proxy
           tags: latest
           registry: ghcr.io
           dockerfile: Dockerfile
