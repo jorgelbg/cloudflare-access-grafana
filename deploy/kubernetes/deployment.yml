@@ -18,23 +18,23 @@ spec:
         app: cfaccess-proxy
     spec:
       containers:
-      - image: j0sh3rs/cfaccess-proxy
-        name: cfaccess-proxy
-        ports:
-          - containerPort: 3001
-        env:
-          - name: AUTHDOMAIN
-            value: https://<your-own-domain>.cloudflareaccess.com
-          - name: POLICYAUD 
-            value: <YOUR_POLICY_AUD_TOKEN>
-          - name: FORWARDUSERHEADER
-            value: X-WEBAUTH-USER
-          - name: FORWARDEMAILHEADER
-            value: X-WEBAUTH-EMAIL
-          - name: FORWARDHOST
-            value: <grafana-host>:3000
-          - name: ADDR
-            value: :3001
+        - image: j0sh3rs/cfaccess-proxy
+          name: cfaccess-proxy
+          ports:
+            - containerPort: 3001
+          env:
+            - name: AUTHDOMAIN
+              value: https://<your-own-domain>.cloudflareaccess.com
+            - name: POLICYAUD
+              value: <YOUR_POLICY_AUD_TOKEN>
+            - name: FORWARDUSERHEADER
+              value: X-WEBAUTH-USER
+            - name: FORWARDEMAILHEADER
+              value: X-WEBAUTH-EMAIL
+            - name: FORWARDHOST
+              value: <grafana-host>:3000
+            - name: ADDR
+              value: :3001
       restartPolicy: Always
 ---
 apiVersion: v1
