@@ -40,11 +40,11 @@ type CloudflareClaim struct {
 // Config is the general configuration (read from environment variables)
 type Config struct {
 	AuthDomain         string
-	PolicyAUD          string
 	ForwardEmailHeader string
-	ForwardUserHeader  string
 	ForwardHost        string
+	ForwardUserHeader  string
 	ListenAddr         string `envconfig:"ADDR"`
+	PolicyAUD          string
 }
 
 var (
@@ -66,7 +66,7 @@ func VerifyToken(next http.Handler, tokenVerifier *oidc.IDTokenVerifier, cfg *Co
 		}
 
 		// Verify the access token
-		ctx := r.Context()
+		ctx := r.Context() //nolint: govet
 		token, err := tokenVerifier.Verify(ctx, accessJWT)
 		if err != nil {
 			w.WriteHeader(http.StatusUnauthorized)
@@ -81,13 +81,13 @@ func VerifyToken(next http.Handler, tokenVerifier *oidc.IDTokenVerifier, cfg *Co
 			w.Write([]byte(fmt.Sprintf("Invalid claims in token: %s", err.Error()))) //nolint: errcheck
 		}
 
-		userName := strings.Split(claims.Email, "@")
+		u := strings.Split(claims.Email, "@")[0]
 
 		// set the authentication forward header before proxying the request
 		r.Header.Add(cfg.ForwardEmailHeader, claims.Email)
-		r.Header.Add(cfg.ForwardUserHeader, userName)
+		r.Header.Add(cfg.ForwardUserHeader, u)
 		log.Printf("Authenticated as: %s", claims.Email)
-		log.Printf("Username extracted as: %s", claims.Username)
+		log.Printf("Username extracted as: %s", u)
 
 		next.ServeHTTP(w, r)
 	}

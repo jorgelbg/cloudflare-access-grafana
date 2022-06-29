@@ -112,7 +112,7 @@ type claimsTest struct {
 }
 
 func (c *claimsTest) run(t *testing.T) {
-	cfg := &Config{
+	cfg := &Config{ //nolint: typecheck
 		AuthDomain:    "https://your-own.cloudflareaccess.com",
 		PolicyAUD:     "my-policy-aud",
 		ForwardHeader: "X-WEBAUTH-USER",
@@ -162,10 +162,10 @@ func (c *claimsTest) run(t *testing.T) {
 
 	req := httptest.NewRequest("GET", "http://domain.com", nil)
 	if c.claims != "" {
-		req.Header.Add(CFJWTHeader, token)
+		req.Header.Add(CFJWTHeader, token) //nolint: typecheck
 	}
 
-	VerifyToken(next, verifier, cfg).ServeHTTP(rr, req)
+	VerifyToken(next, verifier, cfg).ServeHTTP(rr, req) //nolint: typecheck
 
 	if c.upstream != upstream {
 		t.Fatalf("Forward to upstream got: %t, want: %t", upstream, c.upstream)
