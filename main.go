@@ -46,6 +46,16 @@ type Config struct {
 	ListenAddr    string `envconfig:"ADDR"`
 }
 
+// Dummy struct for k8s health checks
+type k8sDummyResponse struct {
+	rsp string
+}
+
+// This method makes every k8sDummyResponse a net.http.Handler
+func (check *k8sDummyResponse) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+	fmt.Fprintf(w, check.rsp)
+}
+
 var (
 	ctx = context.Background()
 )
@@ -119,6 +129,17 @@ func main() {
 	}
 
 	proxy := &httputil.ReverseProxy{Director: director}
+
+	// Creating dummy responses for k8s checks
+	// ref: https://kubernetes.io/docs/reference/using-api/health-checks/
+	dummyResponse := &k8sDummyResponse{
+		rsp: "ok",
+	}
+	http.Handle("/healthz", dummyResponse)
+	http.Handle("/livez", dummyResponse)
+	http.Handle("/readyz", dummyResponse)
+
+	// Handle all other requests to cloudflare proxy
 	http.Handle("/", VerifyToken(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		proxy.ServeHTTP(w, r)
 	}), verifier, &cfg))
