@@ -1,6 +1,6 @@
 module github.com/jorgelbg/cloudflare-access-grafana
 
-go 1.19
+go 1.23.0
 
 require (
 	github.com/coreos/go-oidc v2.2.1+incompatible
@@ -13,8 +13,8 @@ require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/pquerna/cachecontrol v0.1.0 // indirect
-	golang.org/x/crypto v0.14.0 // indirect
-	golang.org/x/net v0.17.0 // indirect
+	golang.org/x/crypto v0.35.0 // indirect
+	golang.org/x/net v0.21.0 // indirect
 	golang.org/x/oauth2 v0.0.0-20220822191816-0ebed06d0094 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/protobuf v1.28.1 // indirect
